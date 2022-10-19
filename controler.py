@@ -1,26 +1,31 @@
 import modul
+import WR_phonebook as WRP
 
-def find_information():
-    inf = input('По какому человеку вы хотите найти информацию?(если не знаете имя или фамилию чеолвека, можете ввести номер телефона)')
+def find_information(inf):
     data = modul.data_store()
     result = []
     for i in data:
         temp = []
-        temp.append(i.values())
-        print(temp)
+        for j in i:
+            temp.append(i.get(j))
         if inf in ' '.join(temp):
             result.append(i)
     return result
 
 
-def list_iformation():
-    inf = input('Список чего вы хотите получить?')
+def list_iformation(inf):
+    inf = inf.split()
     data = modul.data_store()
     result = []
-    for i in data:
-        temp = []
-        temp.append(i.values())
-        print(temp)
-        if inf in ' '.join(temp):
-            result.append(i)
-    
+    for j in inf:  
+        result.append(j)     
+        for i in data:
+            result.append(i.get(j))
+        result.append('\n')
+    return result
+
+def reader():
+    if modul.now_format() == 'txt':
+        return WRP.read_txt()
+
+# def transform():

@@ -10,7 +10,7 @@ def get_task(stop = False):
             print('Всего доброго!')
             return get_task(stop = True)
         if inf == 'получить данные':
-            FIIN()
+            print(FIIN())
         return get_task()
 
 def help_list():

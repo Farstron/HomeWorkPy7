@@ -1,8 +1,9 @@
+import user_interface
 import modul
 import WR_phonebook as WRP
 
-def find_information(inf):
-    data = modul.data_store()
+def find_information(inf, form):
+    data = modul.data_store(form)
     result = []
     for i in data:
         temp = []
@@ -13,9 +14,9 @@ def find_information(inf):
     return result
 
 
-def list_iformation(inf):
+def list_iformation(inf, form):
     inf = inf.split()
-    data = modul.data_store()
+    data = modul.data_store(form)
     result = []
     for j in inf:  
         result.append(j)     
@@ -24,8 +25,15 @@ def list_iformation(inf):
         result.append('\n')
     return result
 
-def reader():
-    if modul.now_format() == 'txt':
-        return WRP.read_txt()
+def reader(form):
+    li = 0
+    if form == 'txt':
+        li = WRP.read_txt()
+    else:
+        li = WRP.read_csv()
+    return li
 
-# def transform():
+def transform(form):
+    if form == 'txt':
+        WRP.write_csv(modul.data_store(form))
+    else: WRP.write_txt(modul.data_store(form))

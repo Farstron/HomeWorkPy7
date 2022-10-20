@@ -1,3 +1,4 @@
+import csv
 def read_txt():
     res_data = []
     with open('phonebook.txt','r') as data:
@@ -22,3 +23,24 @@ def write_txt(res_data):
         output_data.append(' '.join(temp))
     with open('phonebook.txt','w') as data:
         data.write('\n'.join(output_data))
+
+def read_csv() -> list:
+    res_data = []
+    with open('phonebook.csv', 'r', encoding='utf-8') as fin:
+        csv_reader = csv.reader(fin)
+        for i in csv_reader:
+            if i != []:
+                temp = {}
+                temp['Имя'] = i[0]
+                temp['Фамилия'] = i[1]
+                temp['Номер'] = i[2]
+                temp['Город'] = i[3]
+                res_data.append(temp)
+    return res_data
+
+def write_csv(res_data):
+    print(res_data)
+    with open('phonebook.csv', 'w', encoding='utf-8') as fout:
+        csv_writer = csv.writer(fout)
+        for i in res_data:
+            csv_writer.writerow(i.values())
